@@ -49,14 +49,14 @@ TOUCH_STATE = 0
 def setLEDs( a,b,c,d,e,f,g,h ):
   print "setting LEDs"
   print a, b, c, d, e, f, g, h
-  GPIO.output(LED_PIN_1, GPIO.HIGH if a else GPIO.LOW)
-  GPIO.output(LED_PIN_2, GPIO.HIGH if b else GPIO.LOW)
-  GPIO.output(LED_PIN_3, GPIO.HIGH if c else GPIO.LOW)
-  GPIO.output(LED_PIN_4, GPIO.HIGH if d else GPIO.LOW)
-  GPIO.output(LED_PIN_5, GPIO.HIGH if e else GPIO.LOW)
-  GPIO.output(LED_PIN_6, GPIO.HIGH if f else GPIO.LOW)
-  GPIO.output(LED_PIN_7, GPIO.HIGH if g else GPIO.LOW)
-  GPIO.output(LED_PIN_8, GPIO.HIGH if h else GPIO.LOW)
+  GPIO.output(LED_PIN_8, GPIO.HIGH if a else GPIO.LOW)
+  GPIO.output(LED_PIN_7, GPIO.HIGH if b else GPIO.LOW)
+  GPIO.output(LED_PIN_6, GPIO.HIGH if c else GPIO.LOW)
+  GPIO.output(LED_PIN_5, GPIO.HIGH if d else GPIO.LOW)
+  GPIO.output(LED_PIN_4, GPIO.HIGH if e else GPIO.LOW)
+  GPIO.output(LED_PIN_3, GPIO.HIGH if f else GPIO.LOW)
+  GPIO.output(LED_PIN_2, GPIO.HIGH if g else GPIO.LOW)
+  GPIO.output(LED_PIN_1, GPIO.HIGH if h else GPIO.LOW)
 
 
 def setLightMode(mode):
@@ -211,16 +211,16 @@ def checkDaily():
   #knoxville.date = dt.now()
   moon.compute(knoxville)
   phase = moon.phase
-  
+
   knoxville_yesterday.date = datetime.date.fromtimestamp(TIME-86400)
   moon_yesterday = ephem.Moon()
   moon_yesterday.compute(knoxville_yesterday)
   phase_yesterday = moon_yesterday.phase
-  
+
   knoxville_tomorrow.date = datetime.date.fromtimestamp(TIME+86400)
   moon_tomorrow.compute(knoxville_tomorrow)
   phase_tomorrow = moon_tomorrow.phase
-  
+
   print "today's phase"
   print phase
   print "yesterday's phase"
@@ -228,7 +228,7 @@ def checkDaily():
   print "tomorrow's phase"
   print phase_tomorrow
   print "--"
-  
+
   calculatePhase( phase, phase_yesterday, phase_tomorrow )
 
 def calculatePhase(p, p_y, p_t):
@@ -242,10 +242,10 @@ def calculatePhase(p, p_y, p_t):
   global LIGHT_ARRAY
   today_minus_yesterday = p-p_y
   tomorrow_minus_today = p_t-p
-  
+
   print today_minus_yesterday
   print tomorrow_minus_today
-  
+
   print "--$$$$$$$$$$--"
   if p < 6.25:
     print "phase less than 6.25"
@@ -257,13 +257,13 @@ def calculatePhase(p, p_y, p_t):
   elif p < 18.75:
     print "phase less than 18.75"
     if today_minus_yesterday < 0:
-      print "waning crescent"
+      print "waning crescent 1"
       print "1 0 0 0 0 0 0 0"
       LIGHT_ARRAY = array( 'b', [1,0,0,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,0,0,0,0,0,0,0)
     else:
-      print "waxing crescent"
+      print "waxing crescent 1"
       print "0 0 0 0 0 0 0 1"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,0,0,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
@@ -271,13 +271,13 @@ def calculatePhase(p, p_y, p_t):
   elif p < 31.25:
     print "phase less than 31.25"
     if today_minus_yesterday < 0:
-      print "last quarter"
+      print "waning crescent 2"
       print "1 1 0 0 0 0 0 0"
       LIGHT_ARRAY = array( 'b', [1,1,0,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,0,0,0,0,0,0)
     else:
-      print "first quarter"
+      print "waxing crescent 2"
       print "0 0 0 0 0 0 1 1"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,0,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
@@ -285,27 +285,27 @@ def calculatePhase(p, p_y, p_t):
   elif p < 43.75:
     print "phase less than 43.75"
     if today_minus_yesterday < 0:
-      print "waning GIBBOUS"
+      print "waning crescent 3"
       print "1 1 1 0 0 0 0 0"
       LIGHT_ARRAY = array( 'b', [1,1,1,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,0,0,0,0,0)
     else:
-      print "waxing GIBBOUS"
+      print "waxing crescent 3"
       print "0 0 0 0 0 1 1 1"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,1,1,1])
-      if LIGHT_MODE == 0 or LIGHT_MODE == 1: 
+      if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,0,1,1,1)
   elif p < 56.25:
     print "phase less than 56.25"
     if today_minus_yesterday < 0:
-      print "waning half"
+      print "LAST QUARTER"
       print "1 1 1 1 0 0 0 0"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,0,0,0,0)
     else:
-      print "waxing half"
+      print "first quarter"
       print "0 0 0 0 1 1 1 1"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
@@ -313,13 +313,13 @@ def calculatePhase(p, p_y, p_t):
   elif p < 68.75:
     print "phase less than 68.75"
     if today_minus_yesterday < 0:
-      print "waning GIBBOUS"
+      print "waning GIBBOUS 5"
       print "1 1 1 1 1 0 0 0"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,0,0,0)
     else:
-      print "waxing GIBBOUS"
+      print "waxing GIBBOUS 5"
       print "0 0 0 1 1 1 1 1"
       LIGHT_ARRAY = array( 'b', [0,0,0,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
@@ -327,13 +327,13 @@ def calculatePhase(p, p_y, p_t):
   elif p < 81.25:
     print "phase less than 81.25"
     if today_minus_yesterday < 0:
-      print "waning LAST QUARTER"
+      print "waning GIBBOUS 6"
       print "1 1 1 1 1 1 0 0"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,1,0,0)
     else:
-      print "waxing LAST QUARTER"
+      print "waxing GIBBOUS 6"
       print "0 0 1 1 1 1 1 1"
       LIGHT_ARRAY = array( 'b', [0,0,1,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
@@ -341,13 +341,13 @@ def calculatePhase(p, p_y, p_t):
   elif p < 93.75:
     print "phase less than 93.75"
     if today_minus_yesterday < 0:
-      print "waning almost full"
+      print "waning GIBBOUS 7"
       print "1 1 1 1 1 1 1 0"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,1,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,1,1,0)
     else:
-      print "waxing almost full"
+      print "waxing GIBBOUS 7"
       print "0 1 1 1 1 1 1 1"
       LIGHT_ARRAY = array( 'b', [0,1,1,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
@@ -416,12 +416,12 @@ try:
     print datetime.date.fromtimestamp(TIME)
     print "  |||||||||  "
     #printMoon()
-    
+
     checkDaily()
     #checkPhase()
-    
+
     TIME += 86400
-    
+
     time.sleep(5)
 
 except KeyboardInterrupt:
