@@ -1,3 +1,4 @@
+import sys
 import time
 import datetime
 from datetime import datetime as dt
@@ -5,6 +6,8 @@ import ephem
 import schedule
 import RPi.GPIO as GPIO
 from array import *
+
+sys.stdout.write('Starting moonlight')
 
 GPIO.setmode(GPIO.BCM)
 
