@@ -47,6 +47,14 @@ GPIO.setup(LED_PIN_8, GPIO.OUT)
 TOUCH_STATE = 0
 
 def setLEDs( a,b,c,d,e,f,g,h ):
+  global LED_PIN_1
+  global LED_PIN_2
+  global LED_PIN_3
+  global LED_PIN_4
+  global LED_PIN_5
+  global LED_PIN_6
+  global LED_PIN_7
+  global LED_PIN_8
   print "setting LEDs"
   print a, b, c, d, e, f, g, h
   GPIO.output(LED_PIN_8, GPIO.HIGH if a else GPIO.LOW)
@@ -175,20 +183,6 @@ phase_yesterday = moon_yesterday.phase
 moon_tomorrow = ephem.Moon()
 moon_tomorrow.compute(knoxville_tomorrow)
 phase_tomorrow = moon_tomorrow.phase
-
-
-def setLEDs( a,b,c,d,e,f,g,h ):
-  print "setting LEDs"
-  print a, b, c, d, e, f, g, h
-  GPIO.output(LED_PIN_1, GPIO.HIGH if a else GPIO.LOW)
-  GPIO.output(LED_PIN_2, GPIO.HIGH if b else GPIO.LOW)
-  GPIO.output(LED_PIN_3, GPIO.HIGH if c else GPIO.LOW)
-  GPIO.output(LED_PIN_4, GPIO.HIGH if d else GPIO.LOW)
-  GPIO.output(LED_PIN_5, GPIO.HIGH if e else GPIO.LOW)
-  GPIO.output(LED_PIN_6, GPIO.HIGH if f else GPIO.LOW)
-  GPIO.output(LED_PIN_7, GPIO.HIGH if g else GPIO.LOW)
-  GPIO.output(LED_PIN_8, GPIO.HIGH if h else GPIO.LOW)
-
 
 
 def init():
