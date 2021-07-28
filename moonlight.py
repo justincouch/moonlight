@@ -431,6 +431,9 @@ try:
 except KeyboardInterrupt:
   print "keyboard interrupt"
 
+except Exception as e: # work on python 3.x
+    print('Failed: '+ str(e))
+
 except:
   print "other exception"
 
