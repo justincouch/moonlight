@@ -408,7 +408,7 @@ def timeAndDaily():
     sys.stdout.write('time and Daily')
     sys.stdout.write(TIME)
     print(TIME)
-    print( datetime.date.fromtimestamp(TIME) )
+    print( str(datetime.date.fromtimestamp(TIME)) )
     checkDaily()
 
 schedule.every(1).minutes.do(timeAndDaily)
