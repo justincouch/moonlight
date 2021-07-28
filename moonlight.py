@@ -403,20 +403,30 @@ init()
 
 initSequence()
 
+def timeAndDaily():
+    TIME = time.time()
+    sys.stdout.write('time and Daily')
+    sys.stdout.write(TIME)
+    print(TIME)
+    print( datetime.date.fromtimestamp(TIME) )
+    checkDaily()
+
+schedule.every(10).minutes.do(timeAndDaily)
+
 try:
   while True:
-    print "-----------------------------------------------"
-    print "     calculating for "
-    print datetime.date.fromtimestamp(TIME)
-    print "  |||||||||  "
-    #printMoon()
-
-    checkDaily()
-    #checkPhase()
-
-    TIME += 86400
-
-    time.sleep(5)
+    # print "-----------------------------------------------"
+    # print "     calculating for "
+    # print datetime.date.fromtimestamp(TIME)
+    # print "  |||||||||  "
+    # #printMoon()
+    #
+    # checkDaily()
+    # #checkPhase()
+    #
+    # TIME += 86400
+    schedule.run_pending()
+    time.sleep(60)
 
 except KeyboardInterrupt:
   print "keyboard interrupt"
