@@ -405,8 +405,8 @@ initSequence()
 
 def timeAndDaily():
     TIME = time.time()
-    sys.stdout.write('time and Daily')
-    sys.stdout.write(TIME)
+    # sys.stdout.write('time and Daily')
+    # sys.stdout.write(TIME)
     print(TIME)
     print( str(datetime.date.fromtimestamp(TIME)) )
     checkDaily()
