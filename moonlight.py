@@ -4,10 +4,18 @@ import datetime
 from datetime import datetime as dt
 import ephem
 import schedule
+import logging
 import RPi.GPIO as GPIO
 from array import *
 
 sys.stdout.write('Starting moonlight')
+logging.info('Starting moonlight - logger')
+
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+logging.info('So should this')
+logging.warning('And this, too')
+logging.error('And non-ASCII stuff, too, like Øresund and Malmö')
 
 GPIO.setmode(GPIO.BCM)
 
