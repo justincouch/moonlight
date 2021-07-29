@@ -209,9 +209,7 @@ def printMoon():
 
 
 def checkDaily():
-  logging.debug()
   logging.debug(  ">>>>>>>  daily check  >>>>>>>")
-  logging.debug()
 
   knoxville.date = datetime.date.fromtimestamp(TIME)
   #knoxville.date = dt.now()
