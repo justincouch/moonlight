@@ -209,7 +209,9 @@ def printMoon():
 
 
 def checkDaily():
-  print "daily check"
+  print()
+  print (  ">>>>>>>  daily check  >>>>>>>")
+  print()
   knoxville.date = datetime.date.fromtimestamp(TIME)
   #knoxville.date = dt.now()
   moon.compute(knoxville)
@@ -416,7 +418,10 @@ def timeAndDaily():
     TIME = time.time()
     # sys.stdout.write('time and Daily')
     # sys.stdout.write(TIME)
-    print(TIME)
+    print()
+    print('--------- TIME AND DAILY -------------')
+    print()
+    print(time.localtime(TIME))
     print( str(datetime.date.fromtimestamp(TIME)) )
     checkDaily()
 
