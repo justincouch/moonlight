@@ -9,9 +9,10 @@ import RPi.GPIO as GPIO
 from array import *
 
 sys.stdout.write('Starting moonlight')
-logging.info('Starting moonlight - logger')
 
 logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+
+logging.info('Starting moonlight - logger')
 logging.debug('This message should go to the log file')
 logging.info('So should this')
 logging.warning('And this, too')
