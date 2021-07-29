@@ -64,8 +64,8 @@ def setLEDs( a,b,c,d,e,f,g,h ):
   global LED_PIN_6
   global LED_PIN_7
   global LED_PIN_8
-  print "setting LEDs"
-  print a, b, c, d, e, f, g, h
+  logging.debug("setting LEDs")
+  logging.debug(a, b, c, d, e, f, g, h)
   GPIO.output(LED_PIN_8, GPIO.HIGH if a else GPIO.LOW)
   GPIO.output(LED_PIN_7, GPIO.HIGH if b else GPIO.LOW)
   GPIO.output(LED_PIN_6, GPIO.HIGH if c else GPIO.LOW)
@@ -79,8 +79,7 @@ def setLEDs( a,b,c,d,e,f,g,h ):
 def setLightMode(mode):
   global LIGHT_MODE
   LIGHT_MODE = mode
-  print "setting light mode to:"
-  print mode
+  logging.debug("setting light mode to:" + str(mode))
   if LIGHT_MODE == 0:
     GPIO.output(LED_BEZEL_PIN, 1)
     setLEDs( LIGHT_ARRAY[0],LIGHT_ARRAY[1],LIGHT_ARRAY[2],LIGHT_ARRAY[3],LIGHT_ARRAY[4],LIGHT_ARRAY[5],LIGHT_ARRAY[6],LIGHT_ARRAY[7])
@@ -97,22 +96,17 @@ def setLightMode(mode):
 def touch_callback(channel):
   global TOUCH_STATE
   global LIGHT_COUNT
-  #print "BOTH DETECTED"
-  #print channel
-  #print GPIO.input(channel)
   read = GPIO.input(channel)
   if read:
     if read != TOUCH_STATE:
-      print "+++++++++++ touch started"
-    #print "rising!"
+      logging.debug("+++++++++++ touch started")
   else:
     if read != TOUCH_STATE:
-      print "----------- touch ended"
+      logging.debug("----------- touch ended")
       LIGHT_COUNT += 1
       if LIGHT_COUNT > 3:
         LIGHT_COUNT = 0
       setLightMode(LIGHT_COUNT)
-    #print "falling!"
   TOUCH_STATE = read
 
 def touch_callback_rising(channel):
