@@ -209,9 +209,10 @@ def printMoon():
 
 
 def checkDaily():
-  print()
-  print (  ">>>>>>>  daily check  >>>>>>>")
-  print()
+  logging.debug()
+  logging.debug(  ">>>>>>>  daily check  >>>>>>>")
+  logging.debug()
+
   knoxville.date = datetime.date.fromtimestamp(TIME)
   #knoxville.date = dt.now()
   moon.compute(knoxville)
@@ -226,13 +227,13 @@ def checkDaily():
   moon_tomorrow.compute(knoxville_tomorrow)
   phase_tomorrow = moon_tomorrow.phase
 
-  print "today's phase"
-  print phase
-  print "yesterday's phase"
-  print phase_yesterday
-  print "tomorrow's phase"
-  print phase_tomorrow
-  print "--"
+  logging.debug("today's phase")
+  logging.debug(phase)
+  logging.debug("yesterday's phase")
+  logging.debug(phase_yesterday)
+  logging.debug("tomorrow's phase")
+  logging.debug(phase_tomorrow)
+  logging.debug("-daily check over. on to calculating phase-")
 
   calculatePhase( phase, phase_yesterday, phase_tomorrow )
 
@@ -248,118 +249,119 @@ def calculatePhase(p, p_y, p_t):
   today_minus_yesterday = p-p_y
   tomorrow_minus_today = p_t-p
 
-  print today_minus_yesterday
-  print tomorrow_minus_today
+  logging.debug(' ***** calculating phase ***** ')
+  logging.debug('today minus yesterday = ' + str(today_minus_yesterday))
+  logging.debug('tomorrow minus today = ' + str(tomorrow_minus_today))
 
-  print "--$$$$$$$$$$--"
+  logging.debug("-- phases --")
   if p < 6.25:
-    print "phase less than 6.25"
-    print "NEW MOON - ALL OFF"
-    print "0 0 0 0 0 0 0 0"
+    logging.debug("phase less than 6.25")
+    logging.debug("NEW MOON - ALL OFF")
+    logging.debug("0 0 0 0 0 0 0 0")
     LIGHT_ARRAY = array('b', [0,0,0,0,0,0,0,0])
     if LIGHT_MODE == 0 or LIGHT_MODE == 1:
       setLEDs(0,0,0,0,0,0,0,0)
   elif p < 18.75:
-    print "phase less than 18.75"
+    logging.debug("phase less than 18.75")
     if today_minus_yesterday < 0:
-      print "waning crescent 1"
-      print "1 0 0 0 0 0 0 0"
+      logging.debug("waning crescent 1")
+      logging.debug("1 0 0 0 0 0 0 0")
       LIGHT_ARRAY = array( 'b', [1,0,0,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,0,0,0,0,0,0,0)
     else:
-      print "waxing crescent 1"
-      print "0 0 0 0 0 0 0 1"
+      logging.debug("waxing crescent 1")
+      logging.debug("0 0 0 0 0 0 0 1")
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,0,0,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,0,0,0,1)
   elif p < 31.25:
-    print "phase less than 31.25"
+    logging.debug("phase less than 31.25")
     if today_minus_yesterday < 0:
-      print "waning crescent 2"
-      print "1 1 0 0 0 0 0 0"
+      logging.debug("waning crescent 2")
+      logging.debug("1 1 0 0 0 0 0 0")
       LIGHT_ARRAY = array( 'b', [1,1,0,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,0,0,0,0,0,0)
     else:
-      print "waxing crescent 2"
-      print "0 0 0 0 0 0 1 1"
+      logging.debug("waxing crescent 2")
+      logging.debug("0 0 0 0 0 0 1 1")
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,0,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,0,0,1,1)
   elif p < 43.75:
-    print "phase less than 43.75"
+    logging.debug("phase less than 43.75")
     if today_minus_yesterday < 0:
-      print "waning crescent 3"
-      print "1 1 1 0 0 0 0 0"
+      logging.debug("waning crescent 3")
+      logging.debug("1 1 1 0 0 0 0 0")
       LIGHT_ARRAY = array( 'b', [1,1,1,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,0,0,0,0,0)
     else:
-      print "waxing crescent 3"
-      print "0 0 0 0 0 1 1 1"
+      logging.debug("waxing crescent 3")
+      logging.debug("0 0 0 0 0 1 1 1")
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,0,1,1,1)
   elif p < 56.25:
-    print "phase less than 56.25"
+    logging.debug("phase less than 56.25")
     if today_minus_yesterday < 0:
-      print "LAST QUARTER"
-      print "1 1 1 1 0 0 0 0"
+      logging.debug("LAST QUARTER")
+      logging.debug("1 1 1 1 0 0 0 0")
       LIGHT_ARRAY = array( 'b', [1,1,1,1,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,0,0,0,0)
     else:
-      print "first quarter"
-      print "0 0 0 0 1 1 1 1"
+      logging.debug("first quarter")
+      logging.debug("0 0 0 0 1 1 1 1")
       LIGHT_ARRAY = array( 'b', [0,0,0,0,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,1,1,1,1)
   elif p < 68.75:
-    print "phase less than 68.75"
+    logging.debug("phase less than 68.75")
     if today_minus_yesterday < 0:
-      print "waning GIBBOUS 5"
-      print "1 1 1 1 1 0 0 0"
+      logging.debug("waning GIBBOUS 5")
+      logging.debug("1 1 1 1 1 0 0 0")
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,0,0,0)
     else:
-      print "waxing GIBBOUS 5"
-      print "0 0 0 1 1 1 1 1"
+      logging.debug("waxing GIBBOUS 5")
+      logging.debug("0 0 0 1 1 1 1 1")
       LIGHT_ARRAY = array( 'b', [0,0,0,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,1,1,1,1,1)
   elif p < 81.25:
-    print "phase less than 81.25"
+    logging.debug("phase less than 81.25")
     if today_minus_yesterday < 0:
-      print "waning GIBBOUS 6"
-      print "1 1 1 1 1 1 0 0"
+      logging.debug("waning GIBBOUS 6")
+      logging.debug("1 1 1 1 1 1 0 0")
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,1,0,0)
     else:
-      print "waxing GIBBOUS 6"
-      print "0 0 1 1 1 1 1 1"
+      logging.debug("waxing GIBBOUS 6")
+      logging.debug("0 0 1 1 1 1 1 1")
       LIGHT_ARRAY = array( 'b', [0,0,1,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,1,1,1,1,1,1)
   elif p < 93.75:
-    print "phase less than 93.75"
+    logging.debug("phase less than 93.75")
     if today_minus_yesterday < 0:
-      print "waning GIBBOUS 7"
-      print "1 1 1 1 1 1 1 0"
+      logging.debug("waning GIBBOUS 7")
+      logging.debug("1 1 1 1 1 1 1 0")
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,1,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,1,1,0)
     else:
-      print "waxing GIBBOUS 7"
-      print "0 1 1 1 1 1 1 1"
+      logging.debug("waxing GIBBOUS 7")
+      logging.debug("0 1 1 1 1 1 1 1")
       LIGHT_ARRAY = array( 'b', [0,1,1,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,1,1,1,1,1,1,1)
   else:
-    print "FULLLLLLLLLLLLLLL"
-    print "1 1 1 1 1 1 1 1"
+    logging.debug("FULLLLLLLLLLLLLLL")
+    logging.debug("1 1 1 1 1 1 1 1")
     LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,1,1])
     if LIGHT_MODE == 0 or LIGHT_MODE == 1:
       setLEDs(1,1,1,1,1,1,1,1)
@@ -408,8 +410,6 @@ def initSequence():
   #GPIO.output(LED_BEZEL_PIN, GPIO.LOW)
 
 
-print( "print"  )
-
 init()
 
 initSequence()
@@ -418,14 +418,14 @@ def timeAndDaily():
     TIME = time.time()
     # sys.stdout.write('time and Daily')
     # sys.stdout.write(TIME)
-    print()
-    print('--------- TIME AND DAILY -------------')
-    print()
-    print(time.localtime(TIME))
-    print( str(datetime.date.fromtimestamp(TIME)) )
+    logging.debug('')
+    logging.debug('--------- TIME AND DAILY -------------')
+    logging.debug('')
+    logging.debug(time.localtime(TIME))
+    logging.debug( str(datetime.date.fromtimestamp(TIME)) )
     checkDaily()
 
-schedule.every(1).minutes.do(timeAndDaily)
+schedule.every(5).minutes.do(timeAndDaily)
 
 try:
   while True:
@@ -440,17 +440,19 @@ try:
     #
     # TIME += 86400
     schedule.run_pending()
+    logging.debug('pending...')
     time.sleep(60)
 
 except KeyboardInterrupt:
-  print "keyboard interrupt"
+  logging.info('KeyboardInterrupt')
 
 except Exception as e: # work on python 3.x
-    print('Failed: '+ str(e))
+  logging.error('EXCEPTION!!! ' + str(e))
 
 except:
-  print "other exception"
+  logging.error('different exception. weird.')
 
 finally:
-  print "cleaning up"
+  logging.info('Cleaning up GPIO and exiting')
+  logging.info( time.localtime(time.time()) )
   GPIO.cleanup()
