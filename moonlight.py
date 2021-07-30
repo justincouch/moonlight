@@ -65,7 +65,7 @@ def setLEDs( a,b,c,d,e,f,g,h ):
   global LED_PIN_7
   global LED_PIN_8
   logging.debug("setting LEDs")
-  logging.debug(a, b, c, d, e, f, g, h)
+  logging.debug(str(a)+" : "+str(b)+" : "+str(c)+" : "+str(d)+" : "+str(e)+" : "+str(f)+" : "+str(g)+" : "+str(h))
   GPIO.output(LED_PIN_8, GPIO.HIGH if a else GPIO.LOW)
   GPIO.output(LED_PIN_7, GPIO.HIGH if b else GPIO.LOW)
   GPIO.output(LED_PIN_6, GPIO.HIGH if c else GPIO.LOW)
@@ -417,7 +417,8 @@ def timeAndDaily():
     logging.debug( str(datetime.date.fromtimestamp(TIME)) )
     checkDaily()
 
-schedule.every(5).minutes.do(timeAndDaily)
+timeAndDaily()
+schedule.every(60).minutes.do(timeAndDaily)
 
 try:
   while True:
@@ -433,7 +434,7 @@ try:
     # TIME += 86400
     schedule.run_pending()
     logging.debug('pending...')
-    time.sleep(60)
+    time.sleep(600)
 
 except KeyboardInterrupt:
   logging.info('KeyboardInterrupt')
