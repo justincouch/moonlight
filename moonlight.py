@@ -10,7 +10,7 @@ from array import *
 
 sys.stdout.write('Starting moonlight')
 
-logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='moonlight.log', encoding='utf-8', level=logging.DEBUG)
 
 logging.info('Starting moonlight - logger')
 logging.debug('This message should go to the log file')
@@ -219,6 +219,8 @@ def checkDaily():
   moon_tomorrow.compute(knoxville_tomorrow)
   phase_tomorrow = moon_tomorrow.phase
 
+  logging.info( "today is " )
+  logging.info( str(datetime.date.fromtimestamp(TIME)) )
   logging.debug("today's phase")
   logging.debug(phase)
   logging.debug("yesterday's phase")
@@ -240,6 +242,7 @@ def calculatePhase(p, p_y, p_t):
   global LIGHT_ARRAY
   today_minus_yesterday = p-p_y
   tomorrow_minus_today = p_t-p
+  todayphase = ""
 
   logging.debug(' ***** calculating phase ***** ')
   logging.debug('today minus yesterday = ' + str(today_minus_yesterday))
@@ -250,6 +253,7 @@ def calculatePhase(p, p_y, p_t):
     logging.debug("phase less than 6.25")
     logging.debug("NEW MOON - ALL OFF")
     logging.debug("0 0 0 0 0 0 0 0")
+    todayphase = "NEW"
     LIGHT_ARRAY = array('b', [0,0,0,0,0,0,0,0])
     if LIGHT_MODE == 0 or LIGHT_MODE == 1:
       setLEDs(0,0,0,0,0,0,0,0)
@@ -258,12 +262,14 @@ def calculatePhase(p, p_y, p_t):
     if today_minus_yesterday < 0:
       logging.debug("waning crescent 1")
       logging.debug("1 0 0 0 0 0 0 0")
+      todayphase = "Waning Crescent 1"
       LIGHT_ARRAY = array( 'b', [1,0,0,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,0,0,0,0,0,0,0)
     else:
       logging.debug("waxing crescent 1")
       logging.debug("0 0 0 0 0 0 0 1")
+      todayphase = "Waxing Crescent 1"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,0,0,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,0,0,0,1)
@@ -272,12 +278,14 @@ def calculatePhase(p, p_y, p_t):
     if today_minus_yesterday < 0:
       logging.debug("waning crescent 2")
       logging.debug("1 1 0 0 0 0 0 0")
+      todayphase = "Waning Crescent 2"
       LIGHT_ARRAY = array( 'b', [1,1,0,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,0,0,0,0,0,0)
     else:
       logging.debug("waxing crescent 2")
       logging.debug("0 0 0 0 0 0 1 1")
+      todayphase = "Waxing Crescent 2"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,0,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,0,0,1,1)
@@ -286,12 +294,14 @@ def calculatePhase(p, p_y, p_t):
     if today_minus_yesterday < 0:
       logging.debug("waning crescent 3")
       logging.debug("1 1 1 0 0 0 0 0")
+      todayphase = "Waning Crescent 3"
       LIGHT_ARRAY = array( 'b', [1,1,1,0,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,0,0,0,0,0)
     else:
       logging.debug("waxing crescent 3")
       logging.debug("0 0 0 0 0 1 1 1")
+      todayphase = "Waxing Crescent 3"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,0,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,0,1,1,1)
@@ -300,12 +310,14 @@ def calculatePhase(p, p_y, p_t):
     if today_minus_yesterday < 0:
       logging.debug("LAST QUARTER")
       logging.debug("1 1 1 1 0 0 0 0")
+      todayphase = "Last Quarter"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,0,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,0,0,0,0)
     else:
       logging.debug("first quarter")
       logging.debug("0 0 0 0 1 1 1 1")
+      todayphase = "First Quarter"
       LIGHT_ARRAY = array( 'b', [0,0,0,0,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,0,1,1,1,1)
@@ -314,12 +326,14 @@ def calculatePhase(p, p_y, p_t):
     if today_minus_yesterday < 0:
       logging.debug("waning GIBBOUS 5")
       logging.debug("1 1 1 1 1 0 0 0")
+      todayphase = "Waning Gibbous 5"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,0,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,0,0,0)
     else:
       logging.debug("waxing GIBBOUS 5")
       logging.debug("0 0 0 1 1 1 1 1")
+      todayphase = "Waxing Gibbous 5"
       LIGHT_ARRAY = array( 'b', [0,0,0,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,0,1,1,1,1,1)
@@ -328,12 +342,14 @@ def calculatePhase(p, p_y, p_t):
     if today_minus_yesterday < 0:
       logging.debug("waning GIBBOUS 6")
       logging.debug("1 1 1 1 1 1 0 0")
+      todayphase = "Waning Gibbous 6"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,0,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,1,0,0)
     else:
       logging.debug("waxing GIBBOUS 6")
       logging.debug("0 0 1 1 1 1 1 1")
+      todayphase = "Waxing Gibbous 6"
       LIGHT_ARRAY = array( 'b', [0,0,1,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,0,1,1,1,1,1,1)
@@ -342,21 +358,25 @@ def calculatePhase(p, p_y, p_t):
     if today_minus_yesterday < 0:
       logging.debug("waning GIBBOUS 7")
       logging.debug("1 1 1 1 1 1 1 0")
+      todayphase = "Waning Gibbous 7"
       LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,1,0])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(1,1,1,1,1,1,1,0)
     else:
       logging.debug("waxing GIBBOUS 7")
       logging.debug("0 1 1 1 1 1 1 1")
+      todayphase = "Waxing Gibbous 7"
       LIGHT_ARRAY = array( 'b', [0,1,1,1,1,1,1,1])
       if LIGHT_MODE == 0 or LIGHT_MODE == 1:
         setLEDs(0,1,1,1,1,1,1,1)
   else:
     logging.debug("FULLLLLLLLLLLLLLL")
     logging.debug("1 1 1 1 1 1 1 1")
+    todayphase = "Full"
     LIGHT_ARRAY = array( 'b', [1,1,1,1,1,1,1,1])
     if LIGHT_MODE == 0 or LIGHT_MODE == 1:
       setLEDs(1,1,1,1,1,1,1,1)
+  logging.info( todayphase )
 
 
 sequenceTime = 0.1
