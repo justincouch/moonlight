@@ -66,14 +66,14 @@ def setLEDs( a,b,c,d,e,f,g,h ):
   global LED_PIN_8
   logging.debug("setting LEDs")
   logging.debug(str(a)+" : "+str(b)+" : "+str(c)+" : "+str(d)+" : "+str(e)+" : "+str(f)+" : "+str(g)+" : "+str(h))
-  GPIO.output(LED_PIN_8, GPIO.HIGH if a else GPIO.LOW)
-  GPIO.output(LED_PIN_7, GPIO.HIGH if b else GPIO.LOW)
-  GPIO.output(LED_PIN_6, GPIO.HIGH if c else GPIO.LOW)
-  GPIO.output(LED_PIN_5, GPIO.HIGH if d else GPIO.LOW)
-  GPIO.output(LED_PIN_4, GPIO.HIGH if e else GPIO.LOW)
-  GPIO.output(LED_PIN_3, GPIO.HIGH if f else GPIO.LOW)
-  GPIO.output(LED_PIN_2, GPIO.HIGH if g else GPIO.LOW)
-  GPIO.output(LED_PIN_1, GPIO.HIGH if h else GPIO.LOW)
+  GPIO.output(LED_PIN_1, GPIO.HIGH if a else GPIO.LOW)
+  GPIO.output(LED_PIN_2, GPIO.HIGH if b else GPIO.LOW)
+  GPIO.output(LED_PIN_3, GPIO.HIGH if c else GPIO.LOW)
+  GPIO.output(LED_PIN_4, GPIO.HIGH if d else GPIO.LOW)
+  GPIO.output(LED_PIN_5, GPIO.HIGH if e else GPIO.LOW)
+  GPIO.output(LED_PIN_6, GPIO.HIGH if f else GPIO.LOW)
+  GPIO.output(LED_PIN_7, GPIO.HIGH if g else GPIO.LOW)
+  GPIO.output(LED_PIN_8, GPIO.HIGH if h else GPIO.LOW)
 
 
 def setLightMode(mode):
