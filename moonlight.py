@@ -438,7 +438,7 @@ def timeAndDaily():
     checkDaily()
 
 timeAndDaily()
-schedule.every(1).minutes.do(timeAndDaily)
+schedule.every(60).minutes.do(timeAndDaily)
 
 try:
   while True:
@@ -454,7 +454,7 @@ try:
     # TIME += 86400
     schedule.run_pending()
     logging.info('pending...')
-    time.sleep(10)
+    time.sleep(600)
 
 except KeyboardInterrupt:
   logging.info('KeyboardInterrupt')
