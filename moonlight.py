@@ -132,7 +132,7 @@ GPIO.setup(LED_PIN_8, GPIO.OUT)
 
 
 #TIME STUFF
-global TIME = time.time()
+TIME = time.time()
 
 
 
