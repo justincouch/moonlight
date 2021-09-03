@@ -454,7 +454,7 @@ try:
     # TIME += 86400
     schedule.run_pending()
     logging.info('pending...')
-    time.sleep(600)
+    time.sleep(10)
 
 except KeyboardInterrupt:
   logging.info('KeyboardInterrupt')
