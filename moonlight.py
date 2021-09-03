@@ -437,7 +437,7 @@ def timeAndDaily():
     checkDaily()
 
 timeAndDaily()
-schedule.every(10).minutes.do(timeAndDaily)
+schedule.every(1).minutes.do(timeAndDaily)
 
 try:
   while True:
