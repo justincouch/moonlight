@@ -426,7 +426,8 @@ init()
 initSequence()
 
 def timeAndDaily():
-    global TIME = time.time()
+    global TIME
+    TIME = time.time()
     # sys.stdout.write('time and Daily')
     # sys.stdout.write(TIME)
     logging.debug('')
