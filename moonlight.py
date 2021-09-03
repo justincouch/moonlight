@@ -10,13 +10,9 @@ from array import *
 
 sys.stdout.write('Starting moonlight')
 
-logging.basicConfig(filename='moonlight.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='moonlight.log', encoding='utf-8', level=logging.INFO)
 
 logging.info('Starting moonlight - logger')
-logging.debug('This message should go to the log file')
-logging.info('So should this')
-logging.warning('And this, too')
-logging.error('And non-ASCII stuff, too')
 
 GPIO.setmode(GPIO.BCM)
 
@@ -206,6 +202,7 @@ def checkDaily():
   logging.debug(  ">>>>>>>  daily check  >>>>>>>")
 
   knoxville.date = datetime.date.fromtimestamp(TIME)
+  logging.debug (knoxville.date)
   #knoxville.date = dt.now()
   moon.compute(knoxville)
   phase = moon.phase
@@ -438,7 +435,7 @@ def timeAndDaily():
     checkDaily()
 
 timeAndDaily()
-schedule.every(60).minutes.do(timeAndDaily)
+schedule.every(10).minutes.do(timeAndDaily)
 
 try:
   while True:
@@ -453,7 +450,7 @@ try:
     #
     # TIME += 86400
     schedule.run_pending()
-    logging.debug('pending...')
+    logging.info('pending...')
     time.sleep(600)
 
 except KeyboardInterrupt:
