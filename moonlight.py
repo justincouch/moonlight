@@ -217,13 +217,14 @@ def checkDaily():
   phase_tomorrow = moon_tomorrow.phase
 
   logging.info( "today is " )
+  logging.info(TIME)
   logging.info( str(datetime.date.fromtimestamp(TIME)) )
-  logging.debug("today's phase")
-  logging.debug(phase)
-  logging.debug("yesterday's phase")
-  logging.debug(phase_yesterday)
-  logging.debug("tomorrow's phase")
-  logging.debug(phase_tomorrow)
+  logging.info("today's phase")
+  logging.info(phase)
+  logging.info("yesterday's phase")
+  logging.info(phase_yesterday)
+  logging.info("tomorrow's phase")
+  logging.info(phase_tomorrow)
   logging.debug("-daily check over. on to calculating phase-")
 
   calculatePhase( phase, phase_yesterday, phase_tomorrow )
