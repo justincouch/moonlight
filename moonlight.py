@@ -132,7 +132,7 @@ GPIO.setup(LED_PIN_8, GPIO.OUT)
 
 
 #TIME STUFF
-TIME = time.time()
+global TIME = time.time()
 
 
 
@@ -199,6 +199,7 @@ def printMoon():
 
 
 def checkDaily():
+  global TIME
   logging.debug(  ">>>>>>>  daily check  >>>>>>>")
 
   knoxville.date = datetime.date.fromtimestamp(TIME)
@@ -425,7 +426,7 @@ init()
 initSequence()
 
 def timeAndDaily():
-    TIME = time.time()
+    global TIME = time.time()
     # sys.stdout.write('time and Daily')
     # sys.stdout.write(TIME)
     logging.debug('')
